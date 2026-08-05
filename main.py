@@ -2,25 +2,12 @@ from src.gc import calculate_gc ,calculate_at
 from src.nucleotide import count_nucleotides
 from src.reverse import reverse_complement
 from src.transcription import transcribe
- 
+from src.translation import translate
          
  
 
-# -------------------------------------------------------------
 
-    
-#---------------------------------------------------
-    
-    
-# --------------------------------------------------
-def translate(sequence):
-  protein_sequence = ""
-  genetic_code ={"ATG": "M" ,"GCT": "A","TTT": "F","GAA": "E"}
-  for i in range(0, len(sequence), 3):
-   codon = sequence[i:i+3]
-   amino_acid = genetic_code.get(codon)
-   protein_sequence += amino_acid
-  return protein_sequence
+
 #-------------------------------------------------
 def detect_mutation(sequence1, sequence2):
   for i in range(len(sequence1)):
