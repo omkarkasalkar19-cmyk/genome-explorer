@@ -1,25 +1,13 @@
 from src.gc import calculate_gc ,calculate_at
-from src.nucleotidegi import count_nucleotides
-
+from src.nucleotide import count_nucleotides
+from src.reverse import reverse_complement
 
  
          
  
 
 # -------------------------------------------------------------
-def reverse_complement(sequence):
-    complement = ""
-    for nucleotide in sequence:
-      if nucleotide == "A":
-        complement += "T"
-      elif nucleotide == "T":
-        complement += "A"
-      elif nucleotide == "G":
-        complement += "C"
-      elif nucleotide == "C":
-        complement += "G"
-    reverse_complement = complement[::-1] 
-    return complement,reverse_complement
+
     
 #---------------------------------------------------
 def transcribe(sequence):
