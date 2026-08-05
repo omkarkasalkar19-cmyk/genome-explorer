@@ -1,13 +1,6 @@
-from src.gc import calculate_gc
-# ------------------------------------------------------------
-def calculate_at(sequence):
-    a_count = sequence.count("A")
-    t_count = sequence.count("T")
+from src.gc import calculate_gc ,calculate_at
 
-    at_percentage = ((a_count + t_count) / len(sequence)) * 100
 
-    return at_percentage
-# -----------------------------------------------------------
 def count_nucleotides(sequence):
  a_count = 0
  t_count = 0
