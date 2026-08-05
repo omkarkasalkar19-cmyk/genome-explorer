@@ -1,7 +1,7 @@
 from src.gc import calculate_gc ,calculate_at
 from src.nucleotide import count_nucleotides
 from src.reverse import reverse_complement
-
+from src.transcription import transcribe
  
          
  
@@ -10,14 +10,7 @@ from src.reverse import reverse_complement
 
     
 #---------------------------------------------------
-def transcribe(sequence):
-    rna_sequence=""
-    for nucleotide in sequence:
-       if nucleotide == 'T':
-          rna_sequence +='U'
-       else:
-          rna_sequence += nucleotide
-    return rna_sequence    
+    
     
 # --------------------------------------------------
 def translate(sequence):
