@@ -3,7 +3,8 @@ from src.nucleotide import count_nucleotides
 from src.reverse import reverse_complement
 from src.transcription import transcribe
 from src.translation import translate
-from src.mutation import detect_mutation        
+from src.mutation import detect_mutation 
+from src.orf import find_orf       
  
 
 
@@ -11,18 +12,7 @@ from src.mutation import detect_mutation
 #-------------------------------------------------
 
 # ------------------------------------------------
-def find_orf(sequence):
-  found_start = False
-  orf = ""
-  for i in range(0, len(sequence), 3):
-    codon = sequence[i:i+3]
-    if codon == "ATG":
-        found_start = True
-    if found_start:
-       orf += codon
-       if codon in ("TAA", "TAG", "TGA"):
-         break  
-  return orf
+
 #---------program-----------------------------------
 sequence = "ATGGCTTTTGAA"
 sequence1 = "ATGCGAT"
