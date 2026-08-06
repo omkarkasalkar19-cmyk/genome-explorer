@@ -5,35 +5,45 @@ from src.transcription import transcribe
 from src.translation import translate
 from src.mutation import detect_mutation 
 from src.orf import find_orf
-from src.fasta import read_fasta
+from src.fasta import read_multiple_fasta
 
+from src.fasta import read_multiple_fasta
+sequences = read_multiple_fasta("data/sample.fasta")
 
- 
-sequence = read_fasta("data/sample.fasta")
-print(sequence)
 sequence1 = "ATGCGAT"
 sequence2 = "ATGCAAT"
-gc =calculate_gc(sequence)
-print(f"GC Content: {gc:.2f}%")
+for header, sequence in sequences:
+    print("=" * 40)
+    print("Gene :", header)
+    print("=" * 40)
 
-at =calculate_at(sequence)
-print(f"AT Content: {at:.2f}%") 
+    print("Sequence :", sequence)
 
-a,t,g,c=count_nucleotides(sequence)
-print('A :',a)
-print('T :',t)
-print('G :',g)
-print('C :',c) 
+    gc =calculate_gc(sequence)
+    print(f"GC Content: {gc:.2f}%")
 
-complement,reverse=reverse_complement(sequence)
-print("Complement:", complement)
-print("Reverse Complement:", reverse)
+    at =calculate_at(sequence)
+    print(f"AT Content: {at:.2f}%") 
 
-rna=transcribe(sequence)
-print(f"RNA SEQUENCE :{rna}")
+    a,t,g,c=count_nucleotides(sequence)
+    print('A :',a)
+    print('T :',t)
+    print('G :',g)
+    print('C :',c) 
 
-protein=translate(sequence)
-print("protein :", protein)
+    complement, reverse = reverse_complement(sequence)
+    print("Complement:", complement)
+    print("Reverse Complement:", reverse)
+ 
+    rna=transcribe(sequence)
+    print(f"RNA SEQUENCE :{rna}")
+
+    protein=translate(sequence)
+    print("protein :", protein)
+
+    orf=find_orf(sequence)
+    print("ORF :",orf)
+    
 
 position,original,mutated,mutated_type=detect_mutation(sequence1, sequence2)
 print("\n----mutation found-----")
@@ -42,8 +52,7 @@ print("Original :",original )
 print("Mutated  :", mutated)
 print("mutated_type : substitution")
 
-orf=find_orf(sequence)
-print("ORF :",orf)
+    
 
 
 
