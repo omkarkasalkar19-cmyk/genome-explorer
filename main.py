@@ -7,7 +7,7 @@ from src.mutation import detect_mutation
 from src.orf import find_orf
 from src.fasta import read_multiple_fasta
 from src.report import write_report
-sequences = read_multiple_fasta("data/sample.fasta")
+sequences = read_multiple_fasta("data/insulin.fasta")
 sequence1 = "ATGCGAT"
 sequence2 = "ATGCAAT"
 results = []
