@@ -6,12 +6,11 @@ from src.translation import translate
 from src.mutation import detect_mutation 
 from src.orf import find_orf
 from src.fasta import read_multiple_fasta
-
-from src.fasta import read_multiple_fasta
+from src.report import write_report
 sequences = read_multiple_fasta("data/sample.fasta")
-
 sequence1 = "ATGCGAT"
 sequence2 = "ATGCAAT"
+results = []
 for header, sequence in sequences:
     print("=" * 40)
     print("Gene :", header)
@@ -43,7 +42,23 @@ for header, sequence in sequences:
 
     orf=find_orf(sequence)
     print("ORF :",orf)
-    
+
+    result = {
+    "header": header,
+    "sequence": sequence,
+    "length":len(sequence),
+    "gc": gc,
+    "at": at,
+    "protein": protein,
+    "orf": orf,
+
+    "a": a,
+    "t": t,
+    "g": g,
+    "c": c
+}
+    results.append(result)
+write_report(results)    
 
 position,original,mutated,mutated_type=detect_mutation(sequence1, sequence2)
 print("\n----mutation found-----")
@@ -53,8 +68,6 @@ print("Mutated  :", mutated)
 print("mutated_type : substitution")
 
     
-
-
 
    
 
