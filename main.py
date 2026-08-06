@@ -4,17 +4,13 @@ from src.reverse import reverse_complement
 from src.transcription import transcribe
 from src.translation import translate
 from src.mutation import detect_mutation 
-from src.orf import find_orf       
+from src.orf import find_orf
+from src.fasta import read_fasta
+
+
  
-
-
-
-#-------------------------------------------------
-
-# ------------------------------------------------
-
-#---------program-----------------------------------
-sequence = "ATGGCTTTTGAA"
+sequence = read_fasta("data/sample.fasta")
+print(sequence)
 sequence1 = "ATGCGAT"
 sequence2 = "ATGCAAT"
 gc =calculate_gc(sequence)
