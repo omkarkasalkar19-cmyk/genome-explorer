@@ -4,11 +4,13 @@ from src.reverse import reverse_complement
 from src.transcription import transcribe
 from src.translation import translate
 from src.mutation import detect_mutation 
-from src.orf import find_orf
+from src.orf_v3 import find_orf
 from src.fasta import read_multiple_fasta
 from src.report import write_report
-from src.orf_v2 import find_orf
-from src.orf_v3 import find_orf
+from src.protein import protein_length
+from src.protein import amino_acid_count
+from src.protein import molecular_weight
+
 sequences = read_multiple_fasta("data/insulin.fasta")
 sequence1 = "ATGCGAT"
 sequence2 = "ATGCAAT"
@@ -19,6 +21,9 @@ for header, sequence in sequences:
     print("=" * 40)
 
     print("Sequence :", sequence)
+
+    dna_length = len(sequence)
+    print(f"DNA Length: {dna_length} bp")
 
     gc =calculate_gc(sequence)
     print(f"GC Content: {gc:.2f}%")
@@ -42,16 +47,32 @@ for header, sequence in sequences:
     protein=translate(sequence)
     print("protein :", protein)
 
+    weight = molecular_weight(protein)
+    print(f"Molecular Weight: {weight:.2f} Da")
+
+    aa_counts = amino_acid_count(protein)
+    print("Amino Acid Count:")
+    for aa, count in aa_counts.items():
+      print(f"{aa}: {count}")
+
+    protein_len = protein_length(protein)
+    print("protein length :",protein_len)
+
+
     orf=find_orf(sequence)
     print("ORF :",orf)
 
     result = {
     "header": header,
     "sequence": sequence,
-    "length":len(sequence),
+    "dna_length":dna_length,
     "gc": gc,
     "at": at,
     "protein": protein,
+    "protein_length":protein_len,
+    "weight": weight,
+    "aa_counts":aa_counts,
+    
     "orf": orf,
 
     "a": a,
@@ -69,7 +90,7 @@ print("Original :",original )
 print("Mutated  :", mutated)
 print("mutated_type : substitution")
 
-    
+
 
    
 
