@@ -6,16 +6,27 @@ from src.translation import translate
 from src.mutation import detect_mutation 
 from src.orf_v3 import find_orf
 from src.fasta import read_multiple_fasta
-from src.report import write_report
+from src.report import write_report,write_comparison_report
 from src.protein import protein_length
 from src.protein import amino_acid_count
 from src.protein import molecular_weight
 from src.alignment import hamming_distance
 from src.levenshtein import levenshtein
+from src.lcs import lcs
 
 sequences = read_multiple_fasta("data/insulin.fasta")
-sequence1 = "ATGCGAT"
-sequence2 = "ATGCAAT"
+sequences2 = read_multiple_fasta("data/insulin_2.fasta")
+
+header1, seq1 = sequences[0]
+header2, seq2 = sequences2[0]
+
+print("FASTA 1:", header1)
+print("Length 1:", len(seq1))
+
+print("FASTA 2:", header2)
+print("Length 2:", len(seq2))
+
+
 results = []
 for header, sequence in sequences:
     print("=" * 40)
@@ -83,26 +94,42 @@ for header, sequence in sequences:
     "c": c
 }
     results.append(result)
-write_report(results)    
+write_report(results) 
 
+sequence1 = "ATGCGAT"
+sequence2 = "ATGCAAT"
 position,original,mutated,mutated_type=detect_mutation(sequence1, sequence2)
 print("\n----mutation found-----")
 print("Position :",position )
 print("Original :",original )
 print("Mutated  :", mutated)
-print("mutated_type : substitution")
+print("mutated_type :",mutated_type)
 
-
-print("hamming distance :",hamming_distance(sequence1, sequence2))
-
-a = input("Enter first DNA sequence: ").upper()
-b = input("Enter second DNA sequence: ").upper()
-if set(a).issubset({"A", "T", "G", "C"})and set(b).issubset({"A", "T", "G", "C"}) :
-  distance = levenshtein(a, b)
-  print( "levenshtein distance :",distance)
+print("\n----------FASTA comparison--------------")
+if len(seq1) == len(seq2):
+    hamming_result = hamming_distance(seq1, seq2)
 else:
-   print("sequence is incorrect. Use only A,T,G,C")  
+    hamming_result = "Not applicable-sequences have different lengths"
 
+print("Hamming distance:", hamming_result)
+
+lev_distance = levenshtein(seq1, seq2)
+print("Levenshtein distance:", lev_distance) 
+lcs_result = lcs(seq1, seq2)
+
+print("LCS:", lcs_result)
+print("LCS length:", len(lcs_result))
+
+write_comparison_report(
+    header1,
+    seq1,
+    header2,
+    seq2,
+    hamming_result,
+    lev_distance,
+    lcs_result,
+    (position, original, mutated, mutated_type)
+)
    
 
 

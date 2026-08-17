@@ -1,0 +1,29 @@
+==================================================
+Sequence Comparison Report
+==================================================
+
+Sequence 1
+------------------------------
+Header: BC005255.1 Homo sapiens insulin, mRNA (cDNA clone MGC:12292 IMAGE:3950204), complete cds
+Length: 495 bp
+
+Sequence 2
+------------------------------
+Header: Test_Sequence_2
+Length: 51 bp
+
+Sequence Comparison
+------------------------------
+Hamming Distance: Not applicable-sequences have different lengths
+Levenshtein Distance: 444
+LCS: AGCCCTCAGGACAGGCTGCATCAGAAGAGGCCATCAAGCAGATCACTGTCT
+LCS Length: 51
+
+Mutation Test
+------------------------------
+Position: 5
+Original: G
+Mutated: A
+Type: substitution
+
+==================================================
