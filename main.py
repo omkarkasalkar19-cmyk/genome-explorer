@@ -10,6 +10,8 @@ from src.report import write_report
 from src.protein import protein_length
 from src.protein import amino_acid_count
 from src.protein import molecular_weight
+from src.alignment import hamming_distance
+from src.levenshtein import levenshtein
 
 sequences = read_multiple_fasta("data/insulin.fasta")
 sequence1 = "ATGCGAT"
@@ -91,6 +93,15 @@ print("Mutated  :", mutated)
 print("mutated_type : substitution")
 
 
+print("hamming distance :",hamming_distance(sequence1, sequence2))
+
+a = input("Enter first DNA sequence: ").upper()
+b = input("Enter second DNA sequence: ").upper()
+if set(a).issubset({"A", "T", "G", "C"})and set(b).issubset({"A", "T", "G", "C"}) :
+  distance = levenshtein(a, b)
+  print( "levenshtein distance :",distance)
+else:
+   print("sequence is incorrect. Use only A,T,G,C")  
 
    
 
