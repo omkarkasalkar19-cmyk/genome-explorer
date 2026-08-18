@@ -62,4 +62,19 @@ def write_comparison_report(header1, seq1, header2, seq2,
         else:
             file.write("No mutation detected\n")
 
-        file.write("\n" + "=" * 50 + "\n")                    
+        file.write("\n" + "=" * 50 + "\n")  
+
+
+def write_alignment_report(result):
+
+    with open("results/alignment_report.txt", "w") as file:
+
+        file.write("===== Needleman-Wunsch Global Alignment =====\n\n")
+
+        file.write(f"Sequence 1: {result['sequence1']}\n")
+        file.write(f"Sequence 2: {result['sequence2']}\n\n")
+
+        file.write(f"Alignment 1: {result['aligned_seq1']}\n")
+        file.write(f"Alignment 2: {result['aligned_seq2']}\n")
+
+        file.write(f"Alignment Score: {result['score']}\n")                          

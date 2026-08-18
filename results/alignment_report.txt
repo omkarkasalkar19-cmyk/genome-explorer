@@ -1,0 +1,8 @@
+===== Needleman-Wunsch Global Alignment =====
+
+Sequence 1: AGC
+Sequence 2: AC
+
+Alignment 1: AGC
+Alignment 2: A-C
+Alignment Score: 0

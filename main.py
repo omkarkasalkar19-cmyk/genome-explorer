@@ -6,13 +6,14 @@ from src.translation import translate
 from src.mutation import detect_mutation 
 from src.orf_v3 import find_orf
 from src.fasta import read_multiple_fasta
-from src.report import write_report,write_comparison_report
+from src.report import write_report,write_comparison_report,write_alignment_report
 from src.protein import protein_length
 from src.protein import amino_acid_count
 from src.protein import molecular_weight
-from src.alignment import hamming_distance
+from src.alignment import hamming_distance,needleman_wunsch
 from src.levenshtein import levenshtein
 from src.lcs import lcs
+
 
 sequences = read_multiple_fasta("data/insulin.fasta")
 sequences2 = read_multiple_fasta("data/insulin_2.fasta")
@@ -131,8 +132,24 @@ write_comparison_report(
     (position, original, mutated, mutated_type)
 )
    
+alignment_seq1 = "AGC"
+alignment_seq2 = "AC"
+matrix, aligned_seq1, aligned_seq2,score = needleman_wunsch(
+    alignment_seq1,
+    alignment_seq2)
 
+print("Matrix:", matrix)
+print("Alignment 1:", aligned_seq1)
+print("Alignment 2:", aligned_seq2)
+print("score :",score)
 
-
+alignment_result = {
+    "sequence1": alignment_seq1,
+    "sequence2": alignment_seq2,
+    "aligned_seq1": aligned_seq1,
+    "aligned_seq2": aligned_seq2,
+    "score": score
+}
+write_alignment_report(alignment_result)
 
 
